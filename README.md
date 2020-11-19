@@ -2,7 +2,7 @@
 
 ## Todo
 
-- [] Input 구현해서 ISBN 파싱하기
+- [x] Input 구현해서 ISBN 파싱하기
 - [x] 국가자료종합목록(KOLIS NET) API 구현하기 --> https://nl.go.kr/kolisnet/index.do
 - [] API로 받아온 자료 관리하기 (수정, 삭제) --> local storage 활용
 - [] excel 파일로 자료 받기

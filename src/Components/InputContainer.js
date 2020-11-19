@@ -19,7 +19,16 @@ const InputContainer = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    searchByISBN(value);
+    const parsedValue = parseInt(value);
+    if (isNaN(parsedValue) || value.length !== 13) {
+      return;
+    } else {
+      try {
+        searchByISBN(value);
+      } catch {
+        console.log("an error occurred");
+      }
+    }
     setValue("");
   };
 
