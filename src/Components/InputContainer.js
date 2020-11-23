@@ -1,6 +1,8 @@
 import { searchByISBN } from "api";
 import React, { useState } from "react";
 import styled from "styled-components";
+import Papa from "papaparse";
+import { saveAs } from "FileSaver";
 
 const Form = styled.form`
   background-color: white;
@@ -32,12 +34,15 @@ const InputContainer = () => {
     setValue("");
   };
 
-  const handleChange = (event) => setValue(event.target.value);
+  const handleISBNValue = (event) => setValue(event.target.value);
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Input placeholder="hello" value={value} onChange={handleChange} />
+      <Input placeholder="ISBN" value={value} onChange={handleISBNValue} />
       <Button type="submit">Submit</Button>
+      {/* <Button type="button" onClick={downloadAsCsv}>
+        Download
+      </Button> */}
     </Form>
   );
 };

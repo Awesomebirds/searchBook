@@ -62,4 +62,5 @@ export const searchByISBN = async (ISBN) => {
   state.class = CLASSFY_INFO.slice(13);
 
   // save data at local storage
+  localStorage.setItem(state.ISBN, JSON.stringify(state));
 };
