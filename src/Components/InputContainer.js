@@ -18,6 +18,7 @@ const Button = styled.button`
 
 const InputContainer = () => {
   const [value, setValue] = useState("");
+  const [id, setId] = useState(Object.entries(localStorage).length + 1)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,7 +27,8 @@ const InputContainer = () => {
       return;
     } else {
       try {
-        searchByISBN(value);
+        searchByISBN(value, id);
+        setId(id + 1);
       } catch {
         console.log("an error occurred");
       }

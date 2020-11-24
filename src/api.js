@@ -10,9 +10,10 @@ const api = axios.create({
   },
 });
 
-export const searchByISBN = async (ISBN) => {
+export const searchByISBN = async (ISBN, id) => {
   //data blueprint
   const state = {
+    id: id,
     REC_KEY: null,
     ISBN,
     title: "",
@@ -62,5 +63,5 @@ export const searchByISBN = async (ISBN) => {
   state.class = CLASSFY_INFO.slice(13, 16);
 
   // save data at local storage
-  localStorage.setItem(state.ISBN, JSON.stringify(state));
+  localStorage.setItem(state.id, JSON.stringify(state));
 };
