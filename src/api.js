@@ -59,7 +59,7 @@ export const searchByISBN = async (ISBN) => {
       BIBINFO: { CLASSFY_INFO },
     },
   } = parser.parse(detailData);
-  state.class = CLASSFY_INFO.slice(13);
+  state.class = CLASSFY_INFO.slice(13, 16);
 
   // save data at local storage
   localStorage.setItem(state.ISBN, JSON.stringify(state));

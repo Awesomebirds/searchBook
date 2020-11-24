@@ -1,8 +1,8 @@
 import { searchByISBN } from "api";
+import { createCsv } from "csvParser";
+import { fileDownload } from "fileDownloader";
 import React, { useState } from "react";
 import styled from "styled-components";
-import Papa from "papaparse";
-import { saveAs } from "FileSaver";
 
 const Form = styled.form`
   background-color: white;
@@ -36,13 +36,21 @@ const InputContainer = () => {
 
   const handleISBNValue = (event) => setValue(event.target.value);
 
+  const downloadAsCsv = () => {
+    const localArray = Object.entries(localStorage);
+    const objectArray = []
+    localArray.forEach((array) => {objectArray.push(JSON.parse(array[1]))})
+    const csv = createCsv(objectArray);
+    fileDownload(csv)
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
       <Input placeholder="ISBN" value={value} onChange={handleISBNValue} />
       <Button type="submit">Submit</Button>
-      {/* <Button type="button" onClick={downloadAsCsv}>
+      <Button type="button" onClick={downloadAsCsv}>
         Download
-      </Button> */}
+      </Button>
     </Form>
   );
 };
