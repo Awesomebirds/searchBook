@@ -50,17 +50,21 @@ export const searchByISBN = async (ISBN, id) => {
   state.year = RECORD.PUBYEAR;
 
   // api get classification
-  const { data: detailData } = await api.get("", {
-    params: {
-      rec_key: state.REC_KEY,
-    },
-  });
-  const {
-    METADATA: {
-      BIBINFO: { CLASSFY_INFO },
-    },
-  } = parser.parse(detailData);
-  state.class = CLASSFY_INFO.slice(13, 16);
+  if (state.REC_KEY) {
+    const { data: detailData } = await api.get("", {
+      params: {
+        rec_key: state.REC_KEY,
+      },
+    });
+    const {
+      METADATA: {
+        BIBINFO: { CLASSFY_INFO },
+      },
+    } = parser.parse(detailData);
+    state.class = CLASSFY_INFO.slice(13, 16);
+  } else {
+    alert("데이터를 찾을 수 없습니다!");
+  }
 
   // save data at local storage
   localStorage.setItem(state.id, JSON.stringify(state));
