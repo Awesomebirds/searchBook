@@ -1,12 +1,10 @@
 import React from "react";
-import InputContainer from "./InputContainer";
-import Section from "Components/Section";
+import Main from "Components/Main";
 
 const App = () => {
   return (
     <div className="App">
-      <InputContainer />
-      <Section />
+      <Main />
     </div>
   );
 };

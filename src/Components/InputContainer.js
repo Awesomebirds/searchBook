@@ -17,9 +17,14 @@ const Button = styled.button`
 `;
 
 const InputContainer = () => {
+  //hooks
   const [value, setValue] = useState("");
-  const [id, setId] = useState(Object.entries(localStorage).length + 1)
+  const [id, setId] = useState(Object.entries(localStorage).length + 1);
 
+  //input handling
+  const handleISBNValue = (event) => setValue(event.target.value);
+
+  //submit handling
   const handleSubmit = (event) => {
     event.preventDefault();
     const parsedValue = parseInt(value);
@@ -36,15 +41,16 @@ const InputContainer = () => {
     setValue("");
   };
 
-  const handleISBNValue = (event) => setValue(event.target.value);
-
+  //download CSV
   const downloadAsCsv = () => {
     const localArray = Object.entries(localStorage);
-    const objectArray = []
-    localArray.forEach((array) => {objectArray.push(JSON.parse(array[1]))})
+    const objectArray = [];
+    localArray.forEach((array) => {
+      objectArray.push(JSON.parse(array[1]));
+    });
     const csv = createCsv(objectArray);
-    fileDownload(csv)
-  }
+    fileDownload(csv);
+  };
 
   return (
     <Form onSubmit={handleSubmit}>

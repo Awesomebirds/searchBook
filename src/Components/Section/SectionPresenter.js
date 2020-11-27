@@ -1,16 +1,18 @@
 import React from "react";
 
 const SectionPresenter = (props) => {
+  const { data } = props;
+  console.log(data);
   return (
     <div>
       <h1>
-        {props.id}
-        {props.title}
-        {props.ISBN}
-        {props.author}
-        {props.publisher}
-        {props.class}
-        {props.year}
+        {data.id}
+        {data.title}
+        {data.ISBN}
+        {data.author}
+        {data.publisher}
+        {data.class}
+        {data.year}
       </h1>
     </div>
   );

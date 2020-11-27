@@ -10,6 +10,27 @@ const api = axios.create({
   },
 });
 
+// api get classification
+const getClassData = async (REC_KEY) => {
+  const { data: detailData } = await api.get("", {
+    params: {
+      rec_key: REC_KEY,
+    },
+  });
+  const {
+    METADATA: {
+      BIBINFO: { CLASSFY_INFO },
+    },
+  } = parser.parse(detailData);
+  return CLASSFY_INFO.slice(13, 16);
+};
+
+// save data at local storage
+const saveData = (object) => {
+  localStorage.setItem(object.id, JSON.stringify(object));
+};
+
+//Search book data by ISBN from api
 export const searchByISBN = async (ISBN, id) => {
   //data blueprint
   const state = {
@@ -23,7 +44,7 @@ export const searchByISBN = async (ISBN, id) => {
     class: "",
   };
 
-  //api data exept classification
+  //get basic data
   const { data } = await api.get("", {
     params: {
       collection_set: 1,
@@ -49,23 +70,11 @@ export const searchByISBN = async (ISBN, id) => {
   state.publisher = RECORD.PUBLISHER;
   state.year = RECORD.PUBYEAR;
 
-  // api get classification
+  // if there is the data, get classification info and save it.
   if (state.REC_KEY) {
-    const { data: detailData } = await api.get("", {
-      params: {
-        rec_key: state.REC_KEY,
-      },
-    });
-    const {
-      METADATA: {
-        BIBINFO: { CLASSFY_INFO },
-      },
-    } = parser.parse(detailData);
-    state.class = CLASSFY_INFO.slice(13, 16);
+    getClassData(state.REC_KEY);
+    saveData(state);
   } else {
     alert("데이터를 찾을 수 없습니다!");
   }
-
-  // save data at local storage
-  localStorage.setItem(state.id, JSON.stringify(state));
 };
